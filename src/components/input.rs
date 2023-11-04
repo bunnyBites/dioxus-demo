@@ -6,6 +6,7 @@ pub fn Input<'a>(
     name: &'a str,
     field_type: &'a str,
     onchange: EventHandler<'a, Event<FormData>>,
+    value: String,
 ) -> Element<'a> {
     let field_id = format!("field-{}", name);
 
@@ -21,7 +22,8 @@ pub fn Input<'a>(
                 class: "form-control",
                 name: "{name}",
                 onchange: |e| { onchange.call(e) },
-                r#type: "{field_type}"
+                r#type: "{field_type}",
+                value: "{value}"
             }
         }
     )
