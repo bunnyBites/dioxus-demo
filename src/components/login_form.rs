@@ -17,24 +17,35 @@ pub struct UserObj {
 }
 
 pub fn LoginForm(cx: Scope) -> Element {
-    let onsubmit = |event: Event<FormData>| {
+    let username = use_state(cx, || String::default());
+    let password = use_state(cx, || String::default());
+
+    let onsubmit = move |event: Event<FormData>| {
         event.stop_propagation();
-        let value_str: String = serde_json::to_string(&event.values).unwrap();
-        let user_object: UserObj = serde_json::from_str(&value_str).unwrap();
+        info!("username: {}, password: {}", username, password);
+    };
 
-        let prepared_user = User {
-            username: user_object.username.into_iter().next().expect("The vector was empty"),
-            password: user_object.password.into_iter().next().expect("The vector was empty"),
-        };
+    let onchange_username = move |event: Event<FormData>| {
+        username.set(event.value.clone());
+    };
 
-        info!("{:?}", prepared_user);
+    let onchange_password = move |event: Event<FormData>| {
+        password.set(event.value.clone());
     };
 
     render!(
         form {
             onsubmit: onsubmit,
-            Input { name: "username", field_type: "text" }
-            Input { name: "password", field_type: "password" }
+            Input {
+                name: "username",
+                field_type: "text",
+                onchange: onchange_username,
+            }
+            Input {
+                name: "password",
+                field_type: "password",
+                onchange: onchange_password,
+            }
             button {
                 class: "btn btn-info w-100",
                 r#type: "submit",
