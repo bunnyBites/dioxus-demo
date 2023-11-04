@@ -1,5 +1,6 @@
 #![allow(non_snake_case)]
 use dioxus::prelude::*;
+use log::LevelFilter;
 
 mod components;
 mod pages;
@@ -7,6 +8,7 @@ mod pages;
 use crate::{components::appbar::Appbar, pages::login::Login};
 
 fn main() {
+    dioxus_logger::init(LevelFilter::Info).expect("failed to init logger");
     dioxus_web::launch(app);
 }
 
