@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 pub fn Appbar(cx: Scope) -> Element {
     render!(
         nav {
-            class: "navbar navbar-dark bg-info",
+            class: "navbar navbar-dark bg-dark",
             div {
                 class: "container-fluid",
                 span {

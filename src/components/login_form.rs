@@ -53,7 +53,7 @@ pub fn LoginForm(cx: Scope) -> Element {
                 value: user_info.username.clone(),
             }
             button {
-                class: "btn btn-info w-100",
+                class: "btn btn-warning w-100",
                 r#type: "submit",
                 "Submit"
             }
