@@ -18,6 +18,8 @@ pub fn LoginForm(cx: Scope) -> Element {
 
     let onsubmit = move |event: Event<FormData>| {
         event.stop_propagation();
+
+        // user_info that can be used for api or other things
         info!("{:?}", user_info);
     };
 
@@ -31,7 +33,7 @@ pub fn LoginForm(cx: Scope) -> Element {
     let onchange_password = move |event: Event<FormData>| {
         user_info.set(User {
             username: user_info.username.clone(),
-            password: event.value.clone()
+            password: event.value.clone(),
         });
     };
 
